@@ -22,6 +22,7 @@ export interface Build {
 
 export interface Manifest {
   name: string;
+  serial: string;
   version: string;
   home_assistant_domain?: string;
   funding_url?: string;

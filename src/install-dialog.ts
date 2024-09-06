@@ -616,9 +616,17 @@ export class EwtInstallDialog extends LitElement {
       this._installState.state === FlashStateType.INITIALIZING ||
       this._installState.state === FlashStateType.PREPARING
     ) {
+      this.dispatchInstallStateEvent({
+        state: FlashStateType.INITIALIZING,
+        serial: this._manifest.serial,
+      });
       heading = "Installing";
       content = this._renderProgress("Preparing installation");
     } else if (this._installState.state === FlashStateType.ERASING) {
+      this.dispatchInstallStateEvent({
+        state: FlashStateType.ERASING,
+        serial: this._manifest.serial,
+      });
       heading = "Installing";
       content = this._renderProgress("Erasing");
     } else if (
@@ -628,10 +636,18 @@ export class EwtInstallDialog extends LitElement {
       (this._installState.state === FlashStateType.FINISHED &&
         this._client === undefined)
     ) {
+      this.dispatchInstallStateEvent({
+        state: FlashStateType.WRITING,
+        serial: this._manifest.serial,
+      });
       heading = "Installing";
       let percentage: number | undefined;
       let undeterminateLabel: string | undefined;
       if (this._installState.state === FlashStateType.FINISHED) {
+        this.dispatchInstallStateEvent({
+          state: FlashStateType.FINISHED,
+          serial: this._manifest.serial,
+        });
         // We're done writing and detecting improv, show spinner
         undeterminateLabel = "Wrapping up";
       } else if (this._installState.details.percentage < 4) {
@@ -654,6 +670,10 @@ export class EwtInstallDialog extends LitElement {
         percentage,
       );
     } else if (this._installState.state === FlashStateType.FINISHED) {
+      this.dispatchInstallStateEvent({
+        state: FlashStateType.FINISHED,
+        serial: this._manifest.serial,
+      });
       heading = undefined;
       const supportsImprov = this._client !== null;
       content = html`
@@ -677,6 +697,10 @@ export class EwtInstallDialog extends LitElement {
         </div>
       `;
     } else if (this._installState.state === FlashStateType.ERROR) {
+      this.dispatchInstallStateEvent({
+        state: FlashStateType.ERROR,
+        serial: this._manifest.serial,
+      });
       heading = "Installation failed";
       content = html`
         <ewt-page-message
@@ -1093,6 +1117,15 @@ export class EwtInstallDialog extends LitElement {
       }
     `,
   ];
+
+  dispatchInstallStateEvent(detail: any) {
+    const event = new CustomEvent("installStateEvent", {
+      detail,
+      bubbles: true,
+      composed: true,
+    });
+    window.dispatchEvent(event);
+  }
 }
 
 customElements.define("ewt-install-dialog", EwtInstallDialog);
