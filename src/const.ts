@@ -23,6 +23,7 @@ export interface Build {
 export interface Manifest {
   name: string;
   serial: string;
+  id: string;
   version: string;
   home_assistant_domain?: string;
   funding_url?: string;
@@ -94,6 +95,10 @@ export const enum FlashError {
   NOT_SUPPORTED = "not_supported",
   FAILED_FIRMWARE_DOWNLOAD = "failed_firmware_download",
   WRITE_FAILED = "write_failed",
+}
+
+export const enum StateEvents {
+  INSTALL_STATE = "installStateEvent",
 }
 
 declare global {

@@ -23,7 +23,13 @@ import {
   listItemWifi,
   refreshIcon,
 } from "./components/svg";
-import { Logger, Manifest, FlashStateType, FlashState } from "./const.js";
+import {
+  Logger,
+  Manifest,
+  FlashStateType,
+  FlashState,
+  StateEvents,
+} from "./const.js";
 import { ImprovSerial, Ssid } from "improv-wifi-serial-sdk/dist/serial";
 import {
   ImprovSerialCurrentState,
@@ -619,6 +625,8 @@ export class EwtInstallDialog extends LitElement {
       this.dispatchInstallStateEvent({
         state: FlashStateType.INITIALIZING,
         serial: this._manifest.serial,
+        id: this._manifest.id,
+        firmware: this._manifest.version,
       });
       heading = "Installing";
       content = this._renderProgress("Preparing installation");
@@ -626,6 +634,8 @@ export class EwtInstallDialog extends LitElement {
       this.dispatchInstallStateEvent({
         state: FlashStateType.ERASING,
         serial: this._manifest.serial,
+        id: this._manifest.id,
+        firmware: this._manifest.version,
       });
       heading = "Installing";
       content = this._renderProgress("Erasing");
@@ -639,6 +649,8 @@ export class EwtInstallDialog extends LitElement {
       this.dispatchInstallStateEvent({
         state: FlashStateType.WRITING,
         serial: this._manifest.serial,
+        id: this._manifest.id,
+        firmware: this._manifest.version,
       });
       heading = "Installing";
       let percentage: number | undefined;
@@ -647,6 +659,8 @@ export class EwtInstallDialog extends LitElement {
         this.dispatchInstallStateEvent({
           state: FlashStateType.FINISHED,
           serial: this._manifest.serial,
+          id: this._manifest.id,
+          firmware: this._manifest.version,
         });
         // We're done writing and detecting improv, show spinner
         undeterminateLabel = "Wrapping up";
@@ -673,6 +687,8 @@ export class EwtInstallDialog extends LitElement {
       this.dispatchInstallStateEvent({
         state: FlashStateType.FINISHED,
         serial: this._manifest.serial,
+        id: this._manifest.id,
+        firmware: this._manifest.version,
       });
       heading = undefined;
       const supportsImprov = this._client !== null;
@@ -700,6 +716,8 @@ export class EwtInstallDialog extends LitElement {
       this.dispatchInstallStateEvent({
         state: FlashStateType.ERROR,
         serial: this._manifest.serial,
+        id: this._manifest.id,
+        firmware: this._manifest.version,
       });
       heading = "Installation failed";
       content = html`
@@ -1119,7 +1137,7 @@ export class EwtInstallDialog extends LitElement {
   ];
 
   dispatchInstallStateEvent(detail: any) {
-    const event = new CustomEvent("installStateEvent", {
+    const event = new CustomEvent(StateEvents.INSTALL_STATE, {
       detail,
       bubbles: true,
       composed: true,
