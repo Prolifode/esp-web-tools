@@ -1,10 +1,10 @@
 {
   "name": "@prolifode/esp-web-tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Web tools for ESP devices",
   "main": "dist/install-button.js",
-  "repository": "https://github.com/esphome/esp-web-tools",
-  "author": "ESPHome maintainers",
+  "repository": "https://github.com/Prolifode/esp-web-tools",
+  "author": "Prolifode",
   "license": "Apache-2.0",
   "scripts": {
     "prepublishOnly": "script/build",
