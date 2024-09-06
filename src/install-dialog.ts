@@ -656,12 +656,6 @@ export class EwtInstallDialog extends LitElement {
       let percentage: number | undefined;
       let undeterminateLabel: string | undefined;
       if (this._installState.state === FlashStateType.FINISHED) {
-        this.dispatchInstallStateEvent({
-          state: FlashStateType.FINISHED,
-          serial: this._manifest.serial,
-          id: this._manifest.id,
-          firmware: this._manifest.version,
-        });
         // We're done writing and detecting improv, show spinner
         undeterminateLabel = "Wrapping up";
       } else if (this._installState.details.percentage < 4) {

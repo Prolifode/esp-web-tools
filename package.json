@@ -1,6 +1,6 @@
 {
   "name": "@prolifode/esp-web-tools",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Web tools for ESP devices",
   "main": "dist/install-button.js",
   "repository": "https://github.com/Prolifode/esp-web-tools",
