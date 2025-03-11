@@ -116,7 +116,9 @@ export const flash = async (
   const manifestURL = new URL(manifestPath, location.toString()).toString();
   const filePromises = build.parts.map(async (part) => {
     const url = new URL(part.path, manifestURL).toString();
-    const resp = await fetch(url);
+    const resp = await fetch(url, {
+      credentials: "include",
+    });
     if (!resp.ok) {
       throw new Error(
         `Downlading firmware ${part.path} failed: ${resp.status}`,
