@@ -5,7 +5,8 @@ import { connect } from "./connect";
 export class InstallButton extends HTMLElement {
   public static isSupported = "serial" in navigator;
 
-  public static isAllowed = window.isSecureContext;
+  // public static isAllowed = window.isSecureContext;
+  public static isAllowed = true;
 
   private static style = `
   button {
