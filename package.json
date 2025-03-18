@@ -1,6 +1,6 @@
 {
   "name": "@prolifode/esp-web-tools",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Web tools for ESP devices",
   "main": "dist/install-button.js",
   "repository": "https://github.com/Prolifode/esp-web-tools",
@@ -12,27 +12,27 @@
     "build": "cross-env NODE_ENV=production && tsc && rollup -c"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-env": "^7.26.0",
     "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/w3c-web-serial": "^1.0.6",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/w3c-web-serial": "^1.0.7",
     "cross-env": "^7.0.3",
-    "prettier": "^3.2.5",
+    "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
-    "rollup": "^4.10.0",
-    "serve": "^14.2.1",
-    "typescript": "^5.3.3"
+    "rollup": "^4.29.1",
+    "serve": "^14.2.4",
+    "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@material/web": "^1.2.0",
-    "esptool-js": "^0.4.1",
+    "@material/web": "^2.2.0",
+    "esptool-js": "^0.5.3",
     "improv-wifi-serial-sdk": "^2.5.0",
-    "lit": "^3.1.2",
+    "lit": "^3.2.1",
     "pako": "^2.1.0",
-    "tslib": "^2.6.2"
+    "tslib": "^2.8.1"
   }
 }
